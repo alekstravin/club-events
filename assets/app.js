@@ -15,7 +15,7 @@ async function api(path, options={}) {
     if (!response.ok) throw new Error(data.error || "Не удалось получить ответ сервера.");
     return data;
   } catch (error) {
-    if (error instanceof TypeError || error.name === "AbortError") throw new Error("Не удалось связаться с сервером. Попробуйте снова: повторная отправка не создаст вторую запись.");
+    if (error instanceof TypeError || error instanceof SyntaxError || error.name === "AbortError") throw new Error("Не удалось получить ответ сервера. Попробуйте снова: повторная отправка не создаст вторую запись.");
     throw error;
   } finally {clearTimeout(timeout);}
 }
