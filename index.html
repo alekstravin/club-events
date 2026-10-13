@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Очные заседания Клуба ИИИИ. Регистрация, место на встрече и новости Клуба.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self' https://club-iiii-events-gateway.expertlime1.chatgpt.site; base-uri 'self'; form-action 'self' https://club-iiii-events-gateway.expertlime1.chatgpt.site">
+  <meta name="referrer" content="same-origin">
+  <title>Заседания · Клуб ИИИИ</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/config.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">К содержимому</a>
+  <header class="header"><div class="header-inner">
+    <a class="brand" href="./" aria-label="Клуб ИИИИ — главная"><span class="brand-symbol" aria-hidden="true">ИИИИ</span><span class="brand-name">Клуб ИИИИ<span>Практика искусственного интеллекта</span></span></a>
+    <nav aria-label="Основная навигация"><a href="./">Заседания</a><a class="quiet-link" href="https://club-iiii-events-gateway.expertlime1.chatgpt.site/admin/login">Организатору <span aria-hidden="true">↗</span></a></nav>
+  </div></header>
+  <main id="main" class="shell">
+    <noscript><div class="notice warning">Для регистрации <a href="https://club-iiii-events-gateway.expertlime1.chatgpt.site/">откройте портал Клуба</a>.</div></noscript>
+    <div class="notice warning" id="connection-error" role="status" hidden><span id="connection-message"></span> <button class="text-button" id="retry-connection" type="button">Повторить</button></div>
+    <div class="page-heading" id="list-heading"><span class="eyebrow">Люди, идеи и практика</span><h1>Заседания Клуба</h1><p>Выберите встречу и забронируйте место.<br>Регистрация занимает меньше минуты.</p></div>
+    <a class="back-link" id="back-link" href="./" hidden>← Все заседания</a>
+    <div class="two-column">
+      <div>
+        <section id="events-view" aria-label="Ближайшие заседания">
+          <div class="section-line"><h2>Ближайшие встречи</h2><span id="events-total">Обновляем…</span></div>
+          <div id="events-container"><div class="empty-state" role="status"><h3>Загружаем встречи…</h3><p>Проверяем свободные места.</p></div></div>
+        </section>
+        <div id="registration-view" hidden>
+          <div class="event-intro"><span class="eyebrow">Очное заседание</span><h1 id="event-title"></h1>
+            <div class="event-details"><div><span>Когда</span><strong id="event-date"></strong><p id="event-time"></p></div><div><span>Где</span><strong id="event-location"></strong><p>Офлайн · личное участие</p></div></div>
+            <div class="description" id="event-description"></div>
+          </div>
+          <section class="registration-panel" aria-labelledby="register-heading">
+            <div class="registration-heading"><div><span class="eyebrow">Ваше место на встрече</span><h2 id="register-heading">Регистрация</h2></div><div class="seat-count"><strong id="event-remaining">—</strong><span>из <span id="event-capacity"></span><br>мест свободно</span></div></div>
+            <progress class="seat-progress" id="seat-progress" aria-label="Свободные места"></progress>
+            <form id="registration-form">
+              <div class="honeypot" aria-hidden="true"><label>Сайт<input name="website" autocomplete="off" tabindex="-1"></label></div>
+              <label for="full_name">ФИО полностью <span aria-hidden="true">*</span></label><input id="full_name" name="full_name" required maxlength="200" autocomplete="name" placeholder="Иванов Иван Иванович"><p class="field-hint">Укажите как в документе — это поможет оформить пропуск.</p>
+              <label for="organization">Организация <span aria-hidden="true">*</span></label><input id="organization" name="organization" required maxlength="200" autocomplete="organization" placeholder="Название компании или учебного заведения">
+              <label class="checkbox-row pass-row"><input type="checkbox" name="needs_pass"><span><strong>Понадобится заказ пропуска</strong><small>Отметьте, если вам нужно оформить пропуск на площадку.</small></span></label>
+              <label class="checkbox-row consent-row"><input type="checkbox" name="consent" required><span>Согласен на <a href="https://club-iiii-events-gateway.expertlime1.chatgpt.site/privacy" target="_blank" rel="noopener">обработку данных</a> для регистрации и оформления пропуска.</span></label>
+              <div id="registration-error" class="form-error" role="alert" hidden></div>
+              <button class="button full-width" type="submit" id="register-button" disabled>Подготавливаем форму…</button>
+              <p class="small form-footnote">Если планы изменятся, отмените участие по персональной ссылке из подтверждения.</p>
+            </form>
+            <div class="closed-note" id="closed-note" hidden><h3 id="closed-heading">Регистрация закрыта</h3><p>Следите за следующими встречами в каналах Клуба.</p></div>
+          </section>
+        </div>
+      </div>
+      <aside class="channels" aria-label="Каналы Клуба">
+        <span class="eyebrow">Остаёмся на связи</span><h2>Клуб продолжается<br> между встречами.</h2>
+        <p>Подпишитесь на каналы Клуба в Telegram и MAX, чтобы получать анонсы и материалы заседаний.</p>
+        <div class="channel-list">
+          <div class="channel"><a href="https://t.me/+lmxov4QJqGxmNjQy" target="_blank" rel="noopener noreferrer" aria-label="Подписаться на Клуб в Telegram"><img src="assets/telegram-qr.png" alt="QR-код канала Клуба в Telegram" width="112" height="112"></a><div><h3>Telegram</h3><p>Анонсы и обсуждения</p><a href="https://t.me/+lmxov4QJqGxmNjQy" target="_blank" rel="noopener noreferrer">Открыть канал <span aria-hidden="true">↗</span></a></div></div>
+          <div class="channel"><a href="https://max.ru/join/epXp_jbezufKThqWwY2YtgBwYCHZGGAsHbyC4c0ATpY" target="_blank" rel="noopener noreferrer" aria-label="Подписаться на Клуб в MAX"><img src="assets/max-qr.png" alt="QR-код канала Клуба в MAX" width="112" height="112"></a><div><h3>MAX</h3><p>Новости Клуба</p><a href="https://max.ru/join/epXp_jbezufKThqWwY2YtgBwYCHZGGAsHbyC4c0ATpY" target="_blank" rel="noopener noreferrer">Открыть канал <span aria-hidden="true">↗</span></a></div></div>
+        </div>
+        <p class="small channel-note">На телефоне нажмите «Открыть канал».<br> На компьютере — наведите камеру на QR.</p>
+      </aside>
+    </div>
+  </main>
+  <footer class="footer"><span>Клуб ИИИИ · очные встречи</span><a href="https://club-iiii-events-gateway.expertlime1.chatgpt.site/privacy">Обработка данных</a></footer>
+  <template id="event-card-template">
+    <article class="event-card"><div class="event-top"><span class="event-format">Офлайн</span><span class="availability"></span></div><p class="event-date"></p><h3><a class="event-link"></a></h3><p class="location"></p><p class="card-description"></p><div class="card-bottom"><a class="button event-link"></a><span class="small">Участие по регистрации</span></div></article>
+  </template>
+</body>
+</html>
