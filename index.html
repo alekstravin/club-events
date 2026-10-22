@@ -10,7 +10,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
   <script defer src="assets/config.js"></script>
-  <script defer src="assets/app.js"></script>
+  <script defer src="assets/app.js?v=20261022-laptop"></script>
 </head>
 <body>
   <a href="#main" class="skip-link">К содержимому</a>
@@ -42,6 +42,8 @@
               <label for="full_name">ФИО полностью <span aria-hidden="true">*</span></label><input id="full_name" name="full_name" required maxlength="200" autocomplete="name" placeholder="Иванов Иван Иванович"><p class="field-hint">Укажите как в документе — это поможет оформить пропуск.</p>
               <label for="organization">Организация <span aria-hidden="true">*</span></label><input id="organization" name="organization" required maxlength="200" autocomplete="organization" placeholder="Название компании или учебного заведения">
               <label class="checkbox-row pass-row"><input type="checkbox" name="needs_pass"><span><strong>Понадобится заказ пропуска</strong><small>Отметьте, если вам нужно оформить пропуск на площадку.</small></span></label>
+              <label class="checkbox-row pass-row"><input id="needs_laptop_pass" type="checkbox" name="needs_laptop_pass" aria-controls="laptop-serial-field"><span><strong>Нужен пропуск на ноутбук</strong><small>Отметьте, если нужен пропуск на внос ноутбука.</small></span></label>
+              <div id="laptop-serial-field" hidden><label for="laptop_serial">Серийный номер ноутбука <span aria-hidden="true">*</span></label><input id="laptop_serial" name="laptop_serial" maxlength="100" autocomplete="off" spellcheck="false" placeholder="Укажите серийный номер с корпуса ноутбука" disabled><p class="field-hint">Нужен для оформления пропуска на ноутбук.</p></div>
               <label class="checkbox-row consent-row"><input type="checkbox" name="consent" required><span>Согласен на <a href="https://club-iiii-events-gateway.expertlime1.chatgpt.site/privacy" target="_blank" rel="noopener">обработку данных</a> для регистрации и оформления пропуска.</span></label>
               <div id="registration-error" class="form-error" role="alert" hidden></div>
               <button class="button full-width" type="submit" id="register-button" disabled>Подготавливаем форму…</button>

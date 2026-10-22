@@ -5,6 +5,18 @@ const timeFormat = new Intl.DateTimeFormat("ru-RU", {hour:"2-digit",minute:"2-di
 let events = [], selected = null, intent = null, sending = false, refreshing = false, preparing = false;
 const form = byId("registration-form");
 const button = byId("register-button");
+const laptopPass = byId("needs_laptop_pass");
+const laptopSerial = byId("laptop_serial");
+
+function updateLaptopFields() {
+  const needed = laptopPass.checked;
+  byId("laptop-serial-field").hidden = !needed;
+  laptopSerial.disabled = !needed;
+  laptopSerial.required = needed;
+  if (!needed) laptopSerial.value = "";
+}
+laptopPass.addEventListener("change", updateLaptopFields);
+updateLaptopFields();
 
 async function api(path, options={}) {
   const controller = new AbortController();
@@ -76,7 +88,7 @@ async function prepareIntent() {
 function renderSelection() {
   const reference = new URLSearchParams(location.search).get("event");
   const event = events.find(item=>item.id===reference || item.slug===reference) || null;
-  if (selected?.id!==event?.id) {selected=event;intent=null;form.reset();byId("registration-error").hidden=true;}
+  if (selected?.id!==event?.id) {selected=event;intent=null;form.reset();updateLaptopFields();byId("registration-error").hidden=true;}
   else selected=event;
   byId("list-heading").hidden=Boolean(reference);
   byId("events-view").hidden=Boolean(reference);
@@ -121,7 +133,7 @@ form.addEventListener("submit", async event=>{
   if (sending || !selected || !intent || !form.reportValidity()) return;
   const eventId=selected.id;
   const data=new FormData(form);
-  const payload={full_name:data.get("full_name"),organization:data.get("organization"),needs_pass:data.has("needs_pass"),consent:data.has("consent"),website:data.get("website"),request_key:intent.request_key};
+  const payload={full_name:data.get("full_name"),organization:data.get("organization"),needs_pass:data.has("needs_pass"),needs_laptop_pass:data.has("needs_laptop_pass"),laptop_serial:data.get("laptop_serial") || "",consent:data.has("consent"),website:data.get("website"),request_key:intent.request_key};
   sending=true;updateButton();byId("registration-error").hidden=true;
   try {
     const result=await api(`/api/events/${eventId}/register`,{method:"POST",headers:{"Content-Type":"application/json","X-CSRF-Token":intent.csrf_token},body:JSON.stringify(payload)});
